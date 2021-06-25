@@ -10,16 +10,16 @@ if (! localStorage.getItem("subjects")) {
 }
 subjectsArr = JSON.parse(localStorage.getItem("subjects"));
 
-let assignmentsArr = [["Topic 3 Test", "Summative", "Math", ["Test", "Geometry"]], ["CER", "Formative", "Math", ["CER", "Biology"]]];
-if (! localStorage.getItem("assignments")) {
+let assignmentsArr = [["Topic 3 Test", "Math", "100", ["Test", "Geometry"]], ["CER", "Science", "10", ["CER", "Biology"]], ["Topic 4 Test", "Math", "75", ["test", "algebra"]]];
+//if (! localStorage.getItem("assignments")) {
     localStorage.setItem("assignments", JSON.stringify(assignmentsArr));
-}
+//}
 assignmentsArr = JSON.parse(localStorage.getItem("assignments"));
 
 let studentsArr = ["John Doe", "Matthew Bevins", "Jane Doe"];
-if (! localStorage.getItem("students")) {
+//if (! localStorage.getItem("students")) {
     localStorage.setItem("students", JSON.stringify(studentsArr));
-}
+//}
 studentsArr = JSON.parse(localStorage.getItem("students"));
 
 
@@ -39,29 +39,31 @@ container.style.display = "block";
 //Hides old buttons and shows new ones
 function newContainer (i) {
     container.style.display = "none";
-    if (i != -1) {
-        container = containers[i];
-        container.style.display = "block";
+    container = containers[i];
+    container.style.display = "block";
+    let assignments = document.getElementsByClassName("a");
+    let len = assignments.length;
+    for (let i = 0; i < len; i++) {
+        assignments[0].parentNode.removeChild(assignments[0]);
     }
-    
 }
 
 function createAssignmentElement(item) {
     let element = document.createElement("div");
-    element.className = "assignment";
-    element.innerHTML = '<h3 align="center">' + item[0] + '</h3>';
+    element.className = "assignment a";
+    element.id = item;
+    element.innerHTML = '<h3 align="center">' + item[0] + ' (' + item[2] + ')</h3>';
     return element;
 }
 function isSubject(item) {
-    return item[2] == currentSubject;
+    return item[1] == currentSubject;
 }
 //create assignment elements
 function showAssignments() {
     let elementsArr = assignmentsArr.filter(isSubject).map(createAssignmentElement);
-    console.log(elementsArr);
     for (let i = 0; i < elementsArr.length; i++) {
         let br = document.createElement("br");
-        br.className = "break";
+        br.className = "a";
         grades.appendChild(br);
         grades.appendChild(elementsArr[i]);
     }

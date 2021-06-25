@@ -79,3 +79,17 @@ html{
     border: 1px solid slateblue;
     cursor: pointer;
 }
+.btn {
+	/* Displayed like an inline element, but height and width can be changed: */
+	display: inline-block;
+	background-color: gray;
+	color: black;
+	border: none;
+	padding: 10px 20px;
+	margin: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 15px;
+	font-family: inherit;
+}
