@@ -6,6 +6,16 @@ html{
     background-color: #aa113f;
     margin: none;
 }
+#image:hover{
+    cursor: pointer;
+}
+#page{
+    text-decoration: underline;
+    color: slateblue;
+}
+#page:hover{
+    cursor: pointer;
+}
 .section{
     border-radius: 5px;
     margin: 20px auto;
@@ -27,4 +37,45 @@ html{
 }
 .sectionContainer{
     padding: 50px;
+}
+#grades{
+    align-items: center;
+}
+.assignment{
+    border-radius: 5px;
+    /*margin: 20px auto;*/
+    border: 1px solid black;
+    height: 100px;
+    width: 500px;
+    background-color: gray;
+    color: black;
+    display: inline-flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    margin-left: 25px;
+    margin-right: 25px;
+    vertical-align: center;
+}
+.assignment:hover{
+    border: 1px solid slateblue;
+    cursor: pointer;
+}
+.assignmentHeader{
+    border-radius: 5px;
+    /*margin: 20px auto;*/
+    border: 1px solid black;
+    height: 50px;
+    width: 500px;
+    background-color: gray;
+    color: black;
+    display: inline-flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    margin-left: 25px;
+    margin-right: 25px;
+    vertical-align: center;
+}
+.assignmentHeader:hover{
+    border: 1px solid slateblue;
+    cursor: pointer;
 }
