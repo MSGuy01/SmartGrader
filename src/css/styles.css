@@ -1,0 +1,30 @@
+html{
+    font-family: "Roboto", sans-serif;
+}
+#header{
+    padding: 25px;
+    background-color: #aa113f;
+    margin: none;
+}
+.section{
+    border-radius: 5px;
+    margin: 20px auto;
+    border: 5px solid black;
+    height: 300px;
+    width: 300px;
+    background-color: gray;
+    color: black;
+    display: inline-flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    margin-left: 25px;
+    margin-right: 25px;
+    vertical-align: center;
+}
+.section:hover{
+    border: 5px solid slateblue;
+    cursor: pointer;
+}
+.sectionContainer{
+    padding: 50px;
+}
