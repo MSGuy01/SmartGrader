@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <!--<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
         <link rel="icon" type="img/png" href="images/logo.png">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
@@ -26,61 +29,75 @@
                     </div>
                 </div></h3>
             </div>
-            <div id="subjects" class="sectionContainer">
-                <h3 align="center"><div class="section">
-                    <div class="section-label">
-                        <img src="placeholder.jpg" height="50" width="50">
-                        <h3 align="center">Language Arts</h3>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="section-label">
-                        <img src="placeholder.jpg" height="50" width="50">
-                        <h3 align="center">Math</h3>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="section-label">
-                        <img src="placeholder.jpg" height="50" width="50">
-                        <h3 align="center">Science</h3>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="section-label">
-                        <img src="placeholder.jpg" height="50" width="50">
-                        <h3 align="center">Social Studies</h3>
-                    </div>
-                </div></h3>
-                <h3 align="center">Add Subject (PLACEHOLDER)</h3>
-            </div>
-            <!--<div id="students" class="sectionContainer">
-                <h3 align="center"><div class="section">
-                    <div class="section-label">
-                        <img src="placeholder.jpg" height="50" width="50">
-                        <h3 align="center">John Doe (B+)</h3>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="section-label">
-                        <img src="placeholder.jpg" height="50" width="50">
-                        <h3 align="center">Matthew Bevins (A)</h3>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="section-label">
-                        <img src="placeholder.jpg" height="50" width="50">
-                        <h3 align="center">Jane Doe (C-)</h3>
-                    </div>
-                </div></h3>
-                <h3 align="center">Add Student (PLACEHOLDER)</h3>
-            </div>-->
         </div>
-        <h3 align="center"><div id="students" class="sectionContainer">
-            <h3 align="center"><button class="btn">Add Student</button></h3>
-        </div></h3>
+
+        <div id="subjects" class="sectionContainer">
+            <h3 align="center"><button class="btn formButton">Add Subject</button></h3>
+            <!--<h3 align="center"><div class="section">
+                <div class="section-label">
+                    <img src="placeholder.jpg" height="50" width="50">
+                    <h3 align="center">Language Arts</h3>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-label">
+                    <img src="placeholder.jpg" height="50" width="50">
+                    <h3 align="center">Math</h3>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-label">
+                    <img src="placeholder.jpg" height="50" width="50">
+                    <h3 align="center">Science</h3>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-label">
+                    <img src="placeholder.jpg" height="50" width="50">
+                    <h3 align="center">Social Studies</h3>
+                </div>
+            </div></h3>-->
+        </div>
+
+        <div id="students" class="sectionContainer">
+            <h3 align="center"><button class="btn formButton">Add Student</button></h3>
+        </div>
+
         <h3 align="center"><div id="grades" class="sectionContainer">
-            <h3 align="center"><button class="btn">Add Assignment</button></h3>
+            <h3 align="center"><button class="btn formButton">Add Assignment</button></h3>
         </div></h3>
+
+        <h3 align="center"><div id="individual" class="sectionContainer">
+            <h3 align="center"><button class="btn">Grade Assignment</button></h3>
+        </div></h3>
+        
+        <!--FORMS-->
+
+        <h3 align="center"><div id="createSubject" class="sectionContainer">
+            <h2 align="center">Create Subject</h2>
+            <h4 align="center">Subject Name</h4>
+            <h3 align="center"><input id="asubject" placeholder="Subject Name"></h3>
+            <h3 align="center"><button class="btn" id="submitSubject">Submit</button></h3>
+        </div></h3>
+
+        <h3 align="center"><div id="createStudent" class="sectionContainer">
+            <h2 align="center">Create Student</h2>
+            <h4 align="center">Student Name (First and Last)</h4>
+            <h3 align="center"><input id="astudent" placeholder="Student Name"></h3>
+            <h3 align="center"><button class="btn" id="submitStudent">Submit</button></h3>
+        </div></h3>
+
+        <h3 align="center"><div id="createAssignment" class="sectionContainer">
+                <h2 align="center">Create Assignment</h2>
+                <h4 align="center">Assignment Name</h4>
+                <h3 align="center"><input id="aname" placeholder="Assignment Name"></h3>
+                <h4 align="center">Assignment Subtopics (separate with comma)</h4>
+                <h3 align="center"><input id="asubtopics" placeholder="Subtopics"></h3>
+                <h4 align="center">Points</h4>
+                <h3 align="center"><input id="apoints" placeholder="Points"></h3>
+                <h3 align="center"><button class="btn" id="submitAssignment">Submit</button></h3>
+        </div></h3>
+
         <script src="js/index.js"></script>
         <script src="js/subjects.js"></script>
         <script src="js/students.js"></script>
