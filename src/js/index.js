@@ -7,8 +7,7 @@ var currentSubject = "Math";
 
 
 
-
-
+//LOCAL STORAGE
 
 
 //Set up local storage
@@ -31,8 +30,7 @@ let studentsArr = ["John Doe", "Matthew Bevins", "Jane Doe"];
 studentsArr = JSON.parse(localStorage.getItem("students"));
 
 
-
-
+//SETTING UP CONTAINERS
 
 
 //Hide all unneeded buttons
@@ -55,11 +53,9 @@ for (let i = 0; i < formButtons.length; i++) {
 }
 
 
+//MANAGES WHAT IS DISPLAYED ON SCREEN
 
 
-
-
-//Hides old buttons and shows new ones
 function newContainer (i) {
     container.style.display = "none";
     container = containers[i];
@@ -85,8 +81,7 @@ function newContainer (i) {
 }
 
 
-
-
+//CREATES NEW ELEMENTS WHEN NEEDED
 
 
 function createSubjectElement(item) {
@@ -130,7 +125,6 @@ function createAssignmentElement(item) {
 function isSubject(item) {
     return item[1] == currentSubject;
 }
-//create assignment elements
 function showAssignments() {
     let elementsArr = assignmentsArr.filter(isSubject).map(createAssignmentElement);
     for (let i = 0; i < elementsArr.length; i++) {
@@ -142,13 +136,8 @@ function showAssignments() {
 }
 
 
+//FORMS
 
-
-
-
-
-
-//forms
 
 function getSubTopics(val) {
     let finalArr = [];
