@@ -124,7 +124,6 @@ function showStudents() {
 function createAssignmentElement(item) {
     let element = document.createElement("div");
     element.className = "assignment a";
-    element.id = item;
     element.innerHTML = '<h3 align="center">' + item[0] + ' (' + item[2] + ')</h3>';
     return element;
 }
@@ -154,13 +153,11 @@ function showAssignments() {
 function getSubTopics(val) {
     let finalArr = [];
     let current = "";
-    console.log("HEIIFHIEF: " + val.length);
     for (let i = 0; i < val.length; i++) {
         if (val[i] == " ") {
             i++;
         }
         if (val[i] == ",") {
-            console.log('hi');
             finalArr.push(current);
             current = "";
             i++;
@@ -171,17 +168,23 @@ function getSubTopics(val) {
     return finalArr;
 }
 
+submitStudent.addEventListener("click", () => {
+    studentsArr.push(astudent.value);
+    localStorage.setItem("students", JSON.stringify(studentsArr));
+    newContainer(2);
+    showStudents();
+})
+
+submitSubject.addEventListener("click", () => {
+    subjectsArr.push(asubject.value);
+    localStorage.setItem("subjects", JSON.stringify(subjectsArr));
+    newContainer(1);
+    showSubjects();
+})
 
 submitAssignment.addEventListener("click", () => {
     assignmentsArr.push([aname.value, currentSubject, apoints.value, getSubTopics(asubtopics.value)]);
     localStorage.setItem("assignments", JSON.stringify(assignmentsArr));
     newContainer(3);
     showAssignments();
-})
-
-submitStudent.addEventListener("click", () => {
-    studentsArr.push(astudent.value);
-    localStorage.setItem("students", JSON.stringify(studentsArr));
-    newContainer(2);
-    showStudents();
 })
