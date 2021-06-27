@@ -13,5 +13,3 @@ subjectSection.addEventListener("click", function() {
         });
     }
 });
-
-//use map function to create new subjects?
