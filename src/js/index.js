@@ -168,7 +168,7 @@ function createStudentElement(item) {
     element.className = "section student";
     element.id = getIndex(studentsArr, item);
     let grade = (item[1]/item[2]) * 100;
-    element.innerHTML = '<div class="section-label"><img src="images/user.png" height="50" width="50"><h3 align="center">' + item[0] + ' (' + getLetterGrade(grade) + ' - ' + Math.round(grade, 1) + '%)</h3></div>';
+    element.innerHTML = '<div class="section-label"><img src="images/user.png" height="50" width="50"><h3 align="center">' + item[0] + ' (' + getLetterGrade(grade) + ' | ' + Math.round(grade, 1) + '%)</h3></div>';
     return element;
 }
 function showStudents() {
@@ -216,6 +216,47 @@ function showAssignments() {
             grades.appendChild(br);
             grades.appendChild(elementsArr[i]);
         }
+    }
+}
+
+var currentTotal = 0;
+var currentEarned = 0;
+
+function showSubjectList() {
+    currentTotal = 0;
+    currentEarned = 0;
+    let h4 = document.createElement("h4");
+    h4.align = "center";
+    let elementsArr = [];
+    for (let i = 0; i < subjectsArr.length; i++) {
+        for (let j = 0; j < studentsArr[0][3].length; j++) {
+            if (studentsArr[currentStudent][3][j][1] == subjectsArr[i]) {
+                currentTotal += studentsArr[currentStudent][3][j][3];
+                currentEarned += studentsArr[currentStudent][3][j][2];
+            }
+        }
+        let h4 = document.createElement("h5");
+        h4.align = "center";
+        h4.className = "a";
+        h4.innerHTML = subjectsArr[i] + " (" + Math.round((currentEarned/currentTotal) * 100, 1) + "% | " + getLetterGrade(currentEarned/currentTotal * 100) + ")";
+        if (currentEarned/currentTotal * 100 >= 83) {
+            h4.style.color = "green";
+            h4.innerHTML += " - Doing well at this subject";
+        }
+        else if (currentEarned/currentTotal * 100 >= 73) {
+            h4.style.color = "orange";
+            h4.innerHTML += " - May need some help on this subject";
+        }
+        else {
+            h4.style.color = "red";
+            h4.innerHTML += " - Needs help on this subject";
+        }
+        elementsArr.push(h4);
+        currentTotal = 0;
+        currentEarned = 0;
+    }
+    for (let i = 0; i < elementsArr.length; i++) {
+        subjectsList.appendChild(elementsArr[i]);
     }
 }
 
@@ -287,12 +328,13 @@ submitGrade.addEventListener("click", () => {
     }
 
 
-    studentsArr[currentStudent][3][falseLen - 1][4] = true;
-    studentsArr[currentStudent][3][falseLen - 1][2] = gpoints.value;
+    studentsArr[currentStudent][3][gname.value][4] = true;
+    studentsArr[currentStudent][3][gname.value][2] = gpoints.value;
     studentsArr[currentStudent][2] += assignmentsArr[gname.value][2];
     studentsArr[currentStudent][1] += gpoints.value;
     localStorage.setItem("students", JSON.stringify(studentsArr));
     newContainer(4);
     showingStudent = true;
     showAssignments();
+    showSubjectList();
 })

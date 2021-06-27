@@ -11,6 +11,7 @@ studentSection.addEventListener("click", function() {
             newContainer(4);
             showingStudent = true;
             showAssignments();
+            showSubjectList();
         });
     }
 });

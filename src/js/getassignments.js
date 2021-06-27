@@ -3,7 +3,7 @@ gradeAssignmentButton.addEventListener("click", () => {
     for (let i = 0; i < l; i++) {
         document.getElementsByTagName("option")[0].parentNode.removeChild(document.getElementsByTagName("option")[0]);
     }
-    for (let i = 0; i < studentsArr[currentStudent][3].length; i++) {
+    for (let i = 0; i < assignmentsArr.length; i++) {
         if (! studentsArr[currentStudent][3][i][4]) {
             let currentOption = document.createElement("option");
             currentOption.value = i;
