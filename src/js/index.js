@@ -22,7 +22,6 @@ EDIT STUDENT ARR REFERENCES TO INCLUDE 4 INDICES
 //Set up local storage
 let subjectsArr = ["Language Arts", "Math", "Science", "Social Studies"];
 //if (! localStorage.getItem("subjects")) {
-    console.log('change');
     localStorage.setItem("subjects", JSON.stringify(subjectsArr));
 //}
 subjectsArr = JSON.parse(localStorage.getItem("subjects"));
@@ -186,11 +185,6 @@ function createAssignmentElement(item) {
     let element = document.createElement("div");
     element.className = "assignment a";
     if (showingStudent) {
-        console.log(index);
-        console.log(studentsArr[currentStudent]);
-        console.log(studentsArr[currentStudent][3]);
-        console.log(studentsArr[currentStudent][3][index]);
-        console.log(studentsArr[currentStudent][3][index][2]);
         element.innerHTML = '<h3 align="center">[' + item[1] + '] ' + item[0] + ' (' + studentsArr[currentStudent][3][index][2] + '/' + item[2] + ')</h3>';
     }
     else {
@@ -204,7 +198,6 @@ function isSubject(item) {
 }
 function showAssignments() {
     index = 0;
-    console.log('hi');
     let elementsArr;
     if (showingStudent) {
         elementsArr = assignmentsArr.map(createAssignmentElement);
@@ -256,7 +249,7 @@ function getSubTopics(val) {
 submitStudent.addEventListener("click", () => {
     studentsArr.push([astudent.value, 0, 0, []]);
     for (let i = 0; i < assignmentsArr.length; i++) {
-        studentsArr[studentsArr.length-1][3][i].push([assignmentsArr[i][0], assignmentsArr[i][1], 0, assignmentsArr[i][2], false]);
+        studentsArr[studentsArr.length-1][3].push([assignmentsArr[i][0], assignmentsArr[i][1], 0, assignmentsArr[i][2], false]);
     }
     localStorage.setItem("students", JSON.stringify(studentsArr));
     newContainer(2);
