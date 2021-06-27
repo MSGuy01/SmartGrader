@@ -1,6 +1,6 @@
-let studentSection = home.getElementsByClassName("section")[1];
+let studentSection = home.getElementsByClassName("section")[2];
 studentSection.addEventListener("click", function() {
-    newContainer(2);
+    newContainer(3);
     showStudents();
 
     let students = document.getElementById("students");
@@ -8,10 +8,11 @@ studentSection.addEventListener("click", function() {
     for (let i = 0; i < studentSections.length; i++) {
         studentSections[i].addEventListener("click", function() {
             currentStudent = this.id;
-            newContainer(4);
+            newContainer(5);
             showingStudent = true;
             showAssignments();
             showSubjectList();
+            showSubtopicList();
         });
     }
 });

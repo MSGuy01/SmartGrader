@@ -8,7 +8,7 @@ subjectSection.addEventListener("click", function() {
     for (let i = 0; i < subjectSections.length; i++) {
         subjectSections[i].addEventListener("click", function() {
             currentSubject = this.getElementsByTagName("h3")[0].innerHTML;
-            newContainer(3);
+            newContainer(4);
             showAssignments();
         });
     }

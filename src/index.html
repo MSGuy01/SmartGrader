@@ -23,6 +23,12 @@
                 </div>
                 <div class="section">
                     <div class="section-label">
+                        <img src="images/points.png" height="50" width="50">
+                        <h3 align="center">Subtopics</h3>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-label">
                         <img src="images/user.png" height="50" width="50">
                         <h3 align="center">Students</h3>
                     </div>
@@ -31,21 +37,25 @@
         </div>
 
         <div id="subjects" class="sectionContainer">
-            <h3 align="center"><button class="btn formButton">Add Subject</button></h3>
+            <h3 align="center"><button id="addSubject" onclick="newContainer(6)" class="btn formButton">Add Subject</button></h3>
         </div>
 
+        <h3 align="center"><div id="subtopics" class="sectionContainer">
+            <!--<h3 align="center"><button class="btn formButton">Add Subtopic</button></h3>-->
+        </div></h3>
+
         <div id="students" class="sectionContainer">
-            <h3 align="center"><button class="btn formButton">Add Student</button></h3>
+            <h3 align="center"><button id="addStudent" onclick="newContainer(7)" class="btn formButton">Add Student</button></h3>
         </div>
 
         <h3 align="center"><div id="grades" class="sectionContainer">
-            <h3 align="center"><button class="btn formButton">Add Assignment</button></h3>
+            <h3 align="center"><button id="addAssignment" onclick="newContainer(8)"class="btn formButton">Add Assignment</button></h3>
         </div></h3>
 
         <h3 align="center"><div id="individual" class="sectionContainer">
-            <h3 align="center"><button id="gradeAssignmentButton" class="btn formButton">Grade Assignment</button></h3>
+            <h3 align="center"><button id="gradeAssignmentButton" onclick="newContainer(9)" class="btn formButton">Grade Assignment</button></h3>
             <h3 align="center" id="subjectsList">Subjects</h3>
-            <h3 align="center">Subtopics</h3>
+            <h3 align="center" id="subtopicsList">Subtopics</h3>
             <h3 align="center">Assignments</h3>
         </div></h3>
         
@@ -92,6 +102,7 @@
 
         <script src="js/index.js"></script>
         <script src="js/subjects.js"></script>
+        <script src="js/subtopics.js"></script>
         <script src="js/students.js"></script>
         <script src="js/getassignments.js"></script>
     </body>

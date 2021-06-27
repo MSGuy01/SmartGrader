@@ -32,14 +32,14 @@ let assignmentsArr = [["Topic 3 Test", "Math", 100, ["test", "geometry"]]];
 //}
 assignmentsArr = JSON.parse(localStorage.getItem("assignments"));
 
-let subtopicsArr = ["test", "geometry", "cer", "biology", "algebra"];
+let subtopicsArr = ["test", "geometry"];
 //if (! localStorage.getItem("subtopics")) {
     localStorage.setItem("subtopics", JSON.stringify(subtopicsArr));
 //}
 subtopicsArr = JSON.parse(localStorage.getItem("subtopics"));
 
-//[name, earned points, graded points, assignments (name, subject, earned points, total points, graded?), subtopics]
-let studentsArr = [["John Doe", 0, 0, [["Topic 3 Test", "Math", 0, 100, false]]], ["Jane Doe", 0, 0, [["Topic 3 Test", "Math", 0, 100, false]]]];
+//[name, earned points, graded points, assignments (name, subject, earned points, total points, graded?, subtopics)]
+let studentsArr = [["John Doe", 0, 0, [["Topic 3 Test", "Math", 0, 100, false, ["test", "geometry"]]]], ["Jane Doe", 0, 0, [["Topic 3 Test", "Math", 0, 100, false, ["test", "geometry"]]]]];
 //if (! localStorage.getItem("students")) {
     localStorage.setItem("students", JSON.stringify(studentsArr));
 //}
@@ -61,12 +61,6 @@ for (let i = 0; i < sections.length; i++) {
     })
 }
 container.style.display = "block";
-
-for (let i = 0; i < formButtons.length; i++) {
-    formButtons[i].addEventListener("click", () => {
-        newContainer(i + 5);
-    })
-}
 
 
 //MANAGES WHAT IS DISPLAYED ON SCREEN
@@ -101,14 +95,28 @@ function newContainer (i) {
 //CREATES NEW ELEMENTS WHEN NEEDED
 
 
-
+var index2 = -1;
 function createSubjectElement(item) {
+    let currentTotal = 0;
+    let currentEarned = 0;
+    index2++;
+    for (let i = 0; i < studentsArr.length; i++) {
+        for (let j = 0; j < studentsArr[i][3].length; j++) {
+            if (studentsArr[i][3][j][1] == subjectsArr[index2]) {
+                currentEarned += parseInt(studentsArr[i][3][j][2]);
+                currentTotal += parseInt(studentsArr[i][3][j][3]);
+            }
+        }
+    }
+
+
     let element = document.createElement("div");
     element.className = "section subject";
-    element.innerHTML = '<div class="section-label"><img src="images/pencil.png" height="50" width="50"><h3 align="center">' + item + '</h3></div>';
+    element.innerHTML = '<div class="section-label"><img src="images/pencil.png" height="50" width="50"><h3 align="center">' + item + '</h3><h3 align="center" class="classAverageLabel">Class Average: <span class="score">' + Math.round((currentEarned/currentTotal) * 100, 1) + '</span>% | ' + getLetterGrade(currentEarned/currentTotal * 100) + '</h3></div>';
     return element;
 }
 function showSubjects() {
+    index2 = -1;
     let h3 = document.createElement("h3");
     h3.align = "center";
     let elementsArr = subjectsArr.map(createSubjectElement);
@@ -116,6 +124,20 @@ function showSubjects() {
         h3.appendChild(elementsArr[i]);
     }
     subjects.appendChild(h3);
+    for (let i = 0; i < document.getElementsByClassName("classAverageLabel").length; i++) {
+        if (parseInt(document.getElementsByClassName("score")[i].innerHTML) >= 83) {
+            document.getElementsByClassName("classAverageLabel")[i].style.color = "green";
+            document.getElementsByClassName("classAverageLabel")[i].innerHTML += " - Doing well at this subject";
+        }
+        else if (parseInt(document.getElementsByClassName("score")[i].innerHTML) >= 73) {
+            document.getElementsByClassName("classAverageLabel")[i].style.color = "orange";
+            document.getElementsByClassName("classAverageLabel")[i].innerHTML += " - May need some help on this subject";
+        }
+        else {
+            document.getElementsByClassName("classAverageLabel")[i].style.color = "red";
+            document.getElementsByClassName("classAverageLabel")[i].innerHTML += " - Needs help on this subject";
+        }
+    }
 }
 
 function getIndex(arr, val) {
@@ -180,15 +202,92 @@ function showStudents() {
     }
     students.appendChild(h3);
 }
+
+var index4 = -1;
+function createSubtopicElement(item) {
+    let currentTotal = 0;
+    let currentEarned = 0;
+    index4++;
+    for (let i = 0; i < studentsArr.length; i++) {
+        for (let j = 0; j < studentsArr[i][3].length; j++) {
+            for (let k = 0; k < studentsArr[i][3][j][5].length; k++) {
+                if (studentsArr[i][3][j][5][k] == subtopicsArr[index4]) {
+                    console.log('yes');
+                    currentEarned += parseInt(studentsArr[i][3][j][2]);
+                    currentTotal += parseInt(studentsArr[i][3][j][3]);
+                }
+                else{
+                    console.log('no');
+                }
+            }
+        }
+    }
+
+    let element = document.createElement("div");
+    element.className = "assignment a";
+    
+    element.innerHTML = '<h3 align="center" class="classAverageLabelSub">' + item + ' (Class Average: <span class="scoresub">' + Math.round((currentEarned/currentTotal) * 100, 1) + '</span>% | ' + getLetterGrade(currentEarned/currentTotal * 100) + ')</h3>';
+    return element;
+}
+
+function showSubtopics() {
+    index4 = -1;
+    let elementsArr;
+    elementsArr = subtopicsArr.map(createSubtopicElement);
+    for (let i = 0; i < elementsArr.length; i++) {
+        let br = document.createElement("br");
+        br.className = "a";
+        subtopics.appendChild(br);
+        subtopics.appendChild(elementsArr[i]);
+    }
+
+    for (let i = 0; i < document.getElementsByClassName("classAverageLabelSub").length; i++) {
+        if (parseInt(document.getElementsByClassName("scoresub")[i].innerHTML) >= 83) {
+            document.getElementsByClassName("classAverageLabelSub")[i].style.color = "green";
+            document.getElementsByClassName("classAverageLabelSub")[i].innerHTML += " - Doing well at this subtopic";
+        }
+        else if (parseInt(document.getElementsByClassName("scoresub")[i].innerHTML) >= 73) {
+            document.getElementsByClassName("classAverageLabelSub")[i].style.color = "orange";
+            document.getElementsByClassName("classAverageLabelSub")[i].innerHTML += " - May need some help on this subtopic";
+        }
+        else {
+            document.getElementsByClassName("classAverageLabelSub")[i].style.color = "red";
+            document.getElementsByClassName("classAverageLabelSub")[i].innerHTML += " - Needs help on this subtopic";
+        }
+    }
+}
+
+
 var index = 0;
+var index3 = -1;
 function createAssignmentElement(item) {
+    let currentTotal = 0;
+    let currentEarned = 0;
+    index3++;
+    for (let i = 0; i < studentsArr.length; i++) {
+        console.log(item);
+        for (let j = 0; j < studentsArr[i][3].length; j++) {
+            if (studentsArr[i][3][j][1] == assignmentsArr[index3]) {
+                console.log('add');
+                currentEarned += parseInt(studentsArr[i][3][j][2]);
+                currentTotal += parseInt(studentsArr[i][3][j][3]);
+                console.log(currentEarned);
+                console.log('/');
+                console.log(currentTotal);
+            }
+        }
+    }
+
+
+
+
     let element = document.createElement("div");
     element.className = "assignment a";
     if (showingStudent) {
         element.innerHTML = '<h3 align="center">[' + item[1] + '] ' + item[0] + ' (' + studentsArr[currentStudent][3][index][2] + '/' + item[2] + ')</h3>';
     }
     else {
-        element.innerHTML = '<h3 align="center">' + item[0] + ' (' + item[2] + ')</h3>';
+        element.innerHTML = '<h3 align="center">' + item[0] + ' (' + item[2] + ') Class Average: ' + (currentEarned/currentTotal) + '% | ' + + '</h3>';
     }
     index++;
     return element;
@@ -197,6 +296,7 @@ function isSubject(item) {
     return item[1] == currentSubject;
 }
 function showAssignments() {
+    index3 = -1;
     index = 0;
     let elementsArr;
     if (showingStudent) {
@@ -219,20 +319,17 @@ function showAssignments() {
     }
 }
 
-var currentTotal = 0;
-var currentEarned = 0;
-
 function showSubjectList() {
-    currentTotal = 0;
-    currentEarned = 0;
+    let currentTotal = 0;
+    let currentEarned = 0;
     let h4 = document.createElement("h4");
     h4.align = "center";
     let elementsArr = [];
     for (let i = 0; i < subjectsArr.length; i++) {
         for (let j = 0; j < studentsArr[0][3].length; j++) {
             if (studentsArr[currentStudent][3][j][1] == subjectsArr[i]) {
-                currentTotal += studentsArr[currentStudent][3][j][3];
-                currentEarned += studentsArr[currentStudent][3][j][2];
+                currentTotal += parseInt(studentsArr[currentStudent][3][j][3]);
+                currentEarned += parseInt(studentsArr[currentStudent][3][j][2]);
             }
         }
         let h4 = document.createElement("h5");
@@ -260,9 +357,56 @@ function showSubjectList() {
     }
 }
 
+function showSubtopicList() {
+    let currentTotal = 0;
+    let currentEarned = 0;
+    let h4 = document.createElement("h4");
+    h4.align = "center";
+    let elementsArr = [];
+    for (let i = 0; i < subtopicsArr.length; i++) {
+        for (let j = 0; j < studentsArr[0][3].length; j++) {
+            for (let k = 0; k < studentsArr[currentStudent][3][j][5].length; k++) {
+                if (studentsArr[currentStudent][3][j][5][k] == subtopicsArr[i]) {
+                    currentTotal += parseInt(studentsArr[currentStudent][3][j][3]);
+                    currentEarned += parseInt(studentsArr[currentStudent][3][j][2]);
+                }
+            }
+        }
+        let h4 = document.createElement("h5");
+        h4.align = "center";
+        h4.className = "a";
+        h4.innerHTML = subtopicsArr[i] + " (" + Math.round((currentEarned/currentTotal) * 100, 1) + "% | " + getLetterGrade(currentEarned/currentTotal * 100) + ")";
+        if (currentEarned/currentTotal * 100 >= 83) {
+            h4.style.color = "green";
+            h4.innerHTML += " - Doing well at this subtopic";
+        }
+        else if (currentEarned/currentTotal * 100 >= 73) {
+            h4.style.color = "orange";
+            h4.innerHTML += " - May need some help on this subtopic";
+        }
+        else {
+            h4.style.color = "red";
+            h4.innerHTML += " - Needs help on this subtopic";
+        }
+        elementsArr.push(h4);
+        currentTotal = 0;
+        currentEarned = 0;
+    }
+    for (let i = 0; i < elementsArr.length; i++) {
+        subtopicsList.appendChild(elementsArr[i]);
+    }
+}
+
 
 //FORMS
-
+function contains(arr, val) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] == val) {
+            return arr;
+        }
+    }
+    return false;
+}
 
 function getSubTopics(val) {
     let finalArr = [];
@@ -273,14 +417,18 @@ function getSubTopics(val) {
         }
         if (val[i] == ",") {
             finalArr.push(current.toLowerCase());
-            subtopicsArr.push(current.toLowerCase());
+            if (! contains(subtopicsArr, current.toLowerCase())) {
+                subtopicsArr.push(current.toLowerCase());
+            }
             current = "";
             i++;
         }
         current += val[i];
     }
     finalArr.push(current.toLowerCase());
-    subtopicsArr.push(current.toLowerCase());
+    if (! contains(subtopicsArr, current.toLowerCase())) {
+        subtopicsArr.push(current.toLowerCase());
+    }
     localStorage.setItem("subtopics", JSON.stringify(subtopicsArr));
     return finalArr;
 }
@@ -290,10 +438,10 @@ function getSubTopics(val) {
 submitStudent.addEventListener("click", () => {
     studentsArr.push([astudent.value, 0, 0, []]);
     for (let i = 0; i < assignmentsArr.length; i++) {
-        studentsArr[studentsArr.length-1][3].push([assignmentsArr[i][0], assignmentsArr[i][1], 0, assignmentsArr[i][2], false]);
+        studentsArr[studentsArr.length-1][3].push([assignmentsArr[i][0], assignmentsArr[i][1], 0, assignmentsArr[i][2], false, assignmentsArr[i][3]]);
     }
     localStorage.setItem("students", JSON.stringify(studentsArr));
-    newContainer(2);
+    newContainer(3);
     showStudents();
 })
 
@@ -307,11 +455,11 @@ submitSubject.addEventListener("click", () => {
 submitAssignment.addEventListener("click", () => {
     assignmentsArr.push([aname.value, currentSubject, apoints.value, getSubTopics(asubtopics.value)]);
     for (let i = 0; i < studentsArr.length; i++) {
-        studentsArr[i][3].push([aname.value, currentSubject, 0, apoints.value, false]);
+        studentsArr[i][3].push([aname.value, currentSubject, 0, apoints.value, false, getSubTopics(asubtopics.value)]);
     }
     localStorage.setItem("students", JSON.stringify(studentsArr));
     localStorage.setItem("assignments", JSON.stringify(assignmentsArr));
-    newContainer(3);
+    newContainer(4);
     showAssignments();
 })
 
@@ -331,10 +479,11 @@ submitGrade.addEventListener("click", () => {
     studentsArr[currentStudent][3][gname.value][4] = true;
     studentsArr[currentStudent][3][gname.value][2] = gpoints.value;
     studentsArr[currentStudent][2] += assignmentsArr[gname.value][2];
-    studentsArr[currentStudent][1] += gpoints.value;
+    studentsArr[currentStudent][1] += parseInt(gpoints.value);
     localStorage.setItem("students", JSON.stringify(studentsArr));
-    newContainer(4);
+    newContainer(5);
     showingStudent = true;
     showAssignments();
     showSubjectList();
+    showSubtopicList();
 })

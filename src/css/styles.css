@@ -45,7 +45,7 @@ html{
     border-radius: 5px;
     /*margin: 20px auto;*/
     border: 1px solid black;
-    height: 100px;
+    height: 150px;
     width: 500px;
     background-color: gray;
     color: black;
@@ -54,7 +54,6 @@ html{
     align-items: center; /* align vertical */
     margin-left: 25px;
     margin-right: 25px;
-    vertical-align: center;
 }
 .assignment:hover{
     border: 1px solid slateblue;
