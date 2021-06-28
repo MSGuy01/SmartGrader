@@ -19,30 +19,29 @@ EDIT STUDENT ARR REFERENCES TO INCLUDE 4 INDICES
 //LOCAL STORAGE
 
 
-//Set up local storage
 let subjectsArr = ["Language Arts", "Math", "Science", "Social Studies"];
-//if (! localStorage.getItem("subjects")) {
+if (! localStorage.getItem("subjects")) {
     localStorage.setItem("subjects", JSON.stringify(subjectsArr));
-//}
+}
 subjectsArr = JSON.parse(localStorage.getItem("subjects"));
 
 let assignmentsArr = [["Topic 3 Test", "Math", 100, ["test", "geometry"]]];
-//if (! localStorage.getItem("assignments")) {
+if (! localStorage.getItem("assignments")) {
     localStorage.setItem("assignments", JSON.stringify(assignmentsArr));
-//}
+}
 assignmentsArr = JSON.parse(localStorage.getItem("assignments"));
 
 let subtopicsArr = ["test", "geometry"];
-//if (! localStorage.getItem("subtopics")) {
+if (! localStorage.getItem("subtopics")) {
     localStorage.setItem("subtopics", JSON.stringify(subtopicsArr));
-//}
+}
 subtopicsArr = JSON.parse(localStorage.getItem("subtopics"));
 
 //[name, earned points, graded points, assignments (name, subject, earned points, total points, graded?, subtopics)]
 let studentsArr = [["John Doe", 0, 0, [["Topic 3 Test", "Math", 0, 100, false, ["test", "geometry"]]]], ["Jane Doe", 0, 0, [["Topic 3 Test", "Math", 0, 100, false, ["test", "geometry"]]]]];
-//if (! localStorage.getItem("students")) {
+if (! localStorage.getItem("students")) {
     localStorage.setItem("students", JSON.stringify(studentsArr));
-//}
+}
 studentsArr = JSON.parse(localStorage.getItem("students"));
 
 
@@ -212,12 +211,8 @@ function createSubtopicElement(item) {
         for (let j = 0; j < studentsArr[i][3].length; j++) {
             for (let k = 0; k < studentsArr[i][3][j][5].length; k++) {
                 if (studentsArr[i][3][j][5][k] == subtopicsArr[index4]) {
-                    console.log('yes');
                     currentEarned += parseInt(studentsArr[i][3][j][2]);
                     currentTotal += parseInt(studentsArr[i][3][j][3]);
-                }
-                else{
-                    console.log('no');
                 }
             }
         }
@@ -264,16 +259,12 @@ function createAssignmentElement(item) {
     let currentTotal = 0;
     let currentEarned = 0;
     index3++;
+    //loop through students
     for (let i = 0; i < studentsArr.length; i++) {
-        console.log(item);
         for (let j = 0; j < studentsArr[i][3].length; j++) {
-            if (studentsArr[i][3][j][1] == assignmentsArr[index3]) {
-                console.log('add');
+            if (studentsArr[i][3][j][0] == assignmentsArr[index3][0]) {
                 currentEarned += parseInt(studentsArr[i][3][j][2]);
                 currentTotal += parseInt(studentsArr[i][3][j][3]);
-                console.log(currentEarned);
-                console.log('/');
-                console.log(currentTotal);
             }
         }
     }
@@ -287,7 +278,7 @@ function createAssignmentElement(item) {
         element.innerHTML = '<h3 align="center">[' + item[1] + '] ' + item[0] + ' (' + studentsArr[currentStudent][3][index][2] + '/' + item[2] + ')</h3>';
     }
     else {
-        element.innerHTML = '<h3 align="center">' + item[0] + ' (' + item[2] + ') Class Average: ' + (currentEarned/currentTotal) + '% | ' + + '</h3>';
+        element.innerHTML = '<h3 align="center">' + item[0] + ' (' + item[2] + ') Class Average: ' + (currentEarned/currentTotal) * 100 + '% | ' + getLetterGrade((currentEarned/currentTotal) * 100) + '</h3>';
     }
     index++;
     return element;
