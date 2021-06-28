@@ -434,6 +434,7 @@ submitStudent.addEventListener("click", () => {
     localStorage.setItem("students", JSON.stringify(studentsArr));
     newContainer(3);
     showStudents();
+    clickableStudents();
 })
 
 submitSubject.addEventListener("click", () => {
@@ -441,6 +442,7 @@ submitSubject.addEventListener("click", () => {
     localStorage.setItem("subjects", JSON.stringify(subjectsArr));
     newContainer(1);
     showSubjects();
+    clickableSubjects();
 })
 
 submitAssignment.addEventListener("click", () => {
