@@ -473,7 +473,7 @@ submitGrade.addEventListener("click", () => {
 
 
     studentsArr[currentStudent][3][gname.value][4] = true;
-    studentsArr[currentStudent][3][gname.value][2] = parseInt(gpoints.value);
+    studentsArr[currentStudent][3][gname.value][2] = gpoints.value;
     studentsArr[currentStudent][2] += parseInt(assignmentsArr[gname.value][2]);
     studentsArr[currentStudent][1] += parseInt(gpoints.value);
     localStorage.setItem("students", JSON.stringify(studentsArr));
