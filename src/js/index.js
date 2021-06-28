@@ -189,6 +189,9 @@ function createStudentElement(item) {
     element.className = "section student";
     element.id = getIndex(studentsArr, item);
     let grade = (item[1]/item[2]) * 100;
+    console.log(item[1]);
+    console.log(item[2]);
+    console.log(grade);
     element.innerHTML = '<div class="section-label"><img src="images/user.png" height="50" width="50"><h3 align="center">' + item[0] + ' (' + getLetterGrade(grade) + ' | ' + Math.round(grade, 1) + '%)</h3></div>';
     return element;
 }
@@ -470,8 +473,8 @@ submitGrade.addEventListener("click", () => {
 
 
     studentsArr[currentStudent][3][gname.value][4] = true;
-    studentsArr[currentStudent][3][gname.value][2] = gpoints.value;
-    studentsArr[currentStudent][2] += assignmentsArr[gname.value][2];
+    studentsArr[currentStudent][3][gname.value][2] = parseInt(gpoints.value);
+    studentsArr[currentStudent][2] += parseInt(assignmentsArr[gname.value][2]);
     studentsArr[currentStudent][1] += parseInt(gpoints.value);
     localStorage.setItem("students", JSON.stringify(studentsArr));
     newContainer(5);
